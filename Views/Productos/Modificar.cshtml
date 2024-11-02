@@ -1,0 +1,26 @@
+@{
+    ViewData["Title"] = "Modificar Producto";
+}
+
+@model Producto
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="container">
+    <div class="row justify-content-start">
+        <form asp-action="Modificar" method="post" class="col-4 border border-light-subtle rounded">
+            <input asp-for="@Model.IdProducto" hidden>
+            <div class="my-3">
+                <label asp-for="@Model.Descripcion" class="form-label">Descripción</label>
+                <input asp-for="@Model.Descripcion" class="form-control" value="@Model.Descripcion">
+            </div>
+            <div class="my-3">
+                <label asp-for="@Model.Precio" class="form-label">Precio</label>
+                <input asp-for="@Model.Precio" class="form-control" value="@Model.Precio">
+            </div>
+            <div class="my-3">
+                <input type="submit" value="Aceptar" class="btn btn-success">
+            </div>
+        </form>
+    </div>
+</div>
