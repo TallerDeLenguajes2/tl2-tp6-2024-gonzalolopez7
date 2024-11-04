@@ -4,22 +4,25 @@
 
 @model Producto
 
-<h1>@ViewData["Title"]</h1>
+<h1 class="text-center">@ViewData["Title"]</h1>
 
 <div class="container">
-    <div class="row justify-content-start">
+    <div class="row justify-content-center">
         <form asp-action="Crear" method="post" class="col-4 border border-light-subtle rounded">
             <div class="my-3">
-                <label asp-for="@Model.Descripcion" class="form-label">Descripción</label>
+                <label asp-for="@Model.Descripcion" class="form-label">Descripción:</label>
                 <input asp-for="@Model.Descripcion" class="form-control">
             </div>
             <div class="my-3">
-                <label asp-for="@Model.Precio" class="form-label">Precio</label>
+                <label asp-for="@Model.Precio" class="form-label">Precio:</label>
                 <input asp-for="@Model.Precio" class="form-control">
             </div>
-            <div class="my-3">
-                <input type="submit" value="Crear" class="btn btn-success">
+            <div class="my-3 text-center">
+                <input type="submit" value="Crear" class="btn btn-success w-50">
             </div>
         </form>
+    </div>
+    <div class="row mt-5 justify-content-center">
+        <a asp-action="Index" class="btn btn-danger col-4">Atras</a>
     </div>
 </div>
