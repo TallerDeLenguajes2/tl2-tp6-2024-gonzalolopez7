@@ -1,0 +1,40 @@
+@{
+    ViewData["Title"] = "Presupuestos";
+}
+
+@model List<Presupuesto>
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <table class="table table-striped container">
+        <thead>
+            <tr class="row">
+                <th scope="col" class="col-6">Destinatario</th>
+                <th scope="col" class="col-2">Fecha</th>
+                <th scope="col" class="col-4">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var presupuesto in Model)
+            {
+                <tr class="row">
+                    <td class="col-6">@presupuesto.NombreDestinatario</td>
+                    <td class="col-2">@presupuesto.FechaCreacion.ToShortDateString()</td>
+                    <td class="col-4 container">
+                        <div class="row justify-content-evenly">
+                            <a asp-action="VerDetalle" asp-route-id="@presupuesto.IdPresupuesto" class="btn btn-secondary col-3">Detalle</a>
+                            <a asp-action="Modificar" asp-route-id="@presupuesto.IdPresupuesto" class="btn btn-primary col-3">Modificar</a>
+                            <a asp-action="Eliminar" asp-route-id="@presupuesto.IdPresupuesto" class="btn btn-danger col-3">Eliminar</a>
+                            <!-- <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-danger col-3">Eliminar</button> -->
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="text-center">
+    <a asp-action="Crear" class="btn btn-success">Nuevo Presupuesto</a>
+</div>

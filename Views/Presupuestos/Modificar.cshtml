@@ -1,0 +1,41 @@
+@{
+    ViewData["Title"] = "Modificar Presupuesto";
+}
+
+@model Presupuesto
+
+<h1 class="text-center">@ViewData["Title"]</h1>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <form asp-action="Modificar" method="post" class="col-4 border border-light-subtle rounded">
+            <input asp-for="@Model.IdPresupuesto" hidden>
+            <div class="my-3">
+                <label asp-for="@Model.NombreDestinatario" class="form-label">Destinatario:</label>
+                <input asp-for="@Model.NombreDestinatario" class="form-control" value="@Model.NombreDestinatario">
+            </div>
+            <div class="my-3">
+                @for (int i = 0; i < ViewBag.Productos.Count; i++)
+                {
+                    var detalle = Model.Detalle != null ? Model.Detalle.Find(x => x.Producto.IdProducto == ViewBag.Productos[i].IdProducto) : null;
+                    int cantidad = detalle != null ? detalle.Cantidad : 0;
+                    <div class="row my-2">
+                        <label class="col-form-label col-9">@ViewBag.Productos[i].Descripcion:</label>
+                        <div class="col-3">
+                            <input name="Detalle[@i].Cantidad" type="number" value="@cantidad" class="form-control"/>
+                        </div>
+                        <input type="hidden" name="Detalle[@i].Producto.IdProducto" value="@ViewBag.Productos[i].IdProducto" />
+                        <input type="hidden" name="Detalle[@i].Producto.Descripcion" value="@ViewBag.Productos[i].Descripcion" />
+                        <input type="hidden" name="Detalle[@i].Producto.Precio" value="@ViewBag.Productos[i].Precio" />
+                    </div>
+                }
+            </div>
+            <div class="my-3 text-center">
+                <input type="submit" value="Aceptar" class="btn btn-success w-50">
+            </div>
+        </form>
+    </div>
+    <div class="row mt-5 justify-content-center">
+        <a asp-action="Index" class="btn btn-danger col-4">Atras</a>
+    </div>
+</div>

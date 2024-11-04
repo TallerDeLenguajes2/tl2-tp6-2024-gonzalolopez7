@@ -1,0 +1,60 @@
+@{
+    ViewData["Title"] = "Detalle de Presupuesto";
+}
+
+@model Presupuesto
+
+<h1>@ViewData["Title"]</h1>
+<h2>@Model.NombreDestinatario</h2>
+<p> @Model.FechaCreacion.ToShortDateString()</p>
+
+
+<div>
+    @if (Model.Detalle != null)
+    {
+        <table class="table table-striped container w-100">
+            <thead>
+                <tr class="row">
+                    <th scope="col" class="col-6">Producto</th>
+                    <th scope="col" class="col-2 text-center">Precio unitario</th>
+                    <th scope="col" class="col-2 text-center">Cantidad</th>
+                    <th scope="col" class="col-2 text-end">Precio total</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            @{
+                int totalPresupuesto = 0;
+                int total;
+            }
+            @foreach (var detalle in Model.Detalle)
+            {
+                total = detalle.Producto.Precio * detalle.Cantidad;
+                totalPresupuesto += total;
+
+                <tr class="row">
+                    <td class="col-6">@detalle.Producto.Descripcion</td>
+                    <td class="col-2 text-center">@detalle.Producto.Precio</td>
+                    <td class="col-2 text-center">@detalle.Cantidad</td>
+                    <td class="col-2 text-end">@total</td>
+                </tr>
+            }
+                <tr class="row table-primary">
+                    <td class="col-6"></td>
+                    <td class="col-2 text-center"></td>
+                    <td class="col-2 text-center"></td>
+                    <td class="col-2 fw-bold text-end">TOTAL: @totalPresupuesto</td>
+                </tr>
+            </tbody>
+        </table>
+    } else
+    {
+        <div>
+            <p>Presupuesto vacío</p>
+        </div>
+    }
+</div>
+
+<div class="row mt-5 justify-content-center">
+        <a asp-action="Index" class="btn btn-danger col-4">Atras</a>
+</div>
