@@ -145,6 +145,25 @@ public class PresupuestosRepositorio
         AddDetalle(idPresupuesto, detalle);
     }
 
+    public void Eliminar(int idPresupuesto)
+    {
+
+        EliminarDetalle(idPresupuesto);
+
+        string queryString = @"
+            DELETE FROM Presupuestos
+            WHERE idPresupuesto = @idPresupuesto
+        ";
+        using (SqliteConnection connection = new SqliteConnection(connectionString))
+        {
+            connection.Open();
+            SqliteCommand command = new SqliteCommand(queryString, connection);
+            command.Parameters.AddWithValue("@idPresupuesto", idPresupuesto);
+            command.ExecuteNonQuery();
+            connection.Close();
+        }
+    }
+
     private void EliminarDetalle(int idPresupuesto)
     {
         string queryString = @"

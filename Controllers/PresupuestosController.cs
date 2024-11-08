@@ -63,4 +63,10 @@ public class PresupuestosController : Controller
         var presupuesto = repositorio.GetById(id);
         return View(presupuesto);
     }
+
+    public IActionResult Eliminar(int id)
+    {
+        repositorio.Eliminar(id);
+        return Index();
+    }
 }
